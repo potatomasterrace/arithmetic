@@ -1,0 +1,40 @@
+package main
+
+// Division Functions
+//int pmpz_congruent_2exp_p(const unsafe_mpz n, const unsafe_mpz c, mp_bitcnt_t b);
+//int pmpz_congruent_p(const unsafe_mpz n, const unsafe_mpz c, const unsafe_mpz d);
+//int pmpz_congruent_ui_p(const unsafe_mpz n, unsigned long int c, unsigned long int d);
+//int pmpz_divisible_2exp_p(const unsafe_mpz n, mp_bitcnt_t b);
+//int pmpz_divisible_p(const unsafe_mpz n, const unsafe_mpz d);
+//int pmpz_divisible_ui_p(const unsafe_mpz n, unsigned long int d);
+//unsafe_mpz pmpz_cdiv_q(const unsafe_mpz n, const unsafe_mpz d);
+//unsafe_mpz pmpz_cdiv_q_2exp(const unsafe_mpz n, const mp_bitcnt_t b);
+//unsafe_mpz pmpz_cdiv_r(const unsafe_mpz n, const unsafe_mpz d);
+//unsafe_mpz pmpz_cdiv_r_2exp(const unsafe_mpz n, const mp_bitcnt_t b);
+//unsafe_mpz pmpz_divexact(const unsafe_mpz n, const unsafe_mpz d);
+//unsafe_mpz pmpz_divexact_ui(const unsafe_mpz n, unsigned long d);
+//unsafe_mpz pmpz_fdiv_q(const unsafe_mpz n, const unsafe_mpz d);
+//unsafe_mpz pmpz_fdiv_q_2exp(const unsafe_mpz n, const mp_bitcnt_t b);
+//unsafe_mpz pmpz_fdiv_r(const unsafe_mpz n, const unsafe_mpz d);
+//unsafe_mpz pmpz_fdiv_r_2exp(const unsafe_mpz n, const mp_bitcnt_t b);
+//unsafe_mpz pmpz_mod(const unsafe_mpz n, const unsafe_mpz d);
+//unsafe_mpz pmpz_tdiv_q(const unsafe_mpz n, const unsafe_mpz d);
+//unsafe_mpz pmpz_tdiv_q_2exp(const unsafe_mpz n, const mp_bitcnt_t b);
+//unsafe_mpz pmpz_tdiv_r(const unsafe_mpz n, const unsafe_mpz d);
+//unsafe_mpz pmpz_tdiv_r_2exp(const unsafe_mpz n, const mp_bitcnt_t b);
+//unsigned long int pmpz_cdiv_q_ui(unsafe_mpz q, const unsafe_mpz n, unsigned long int d);
+//unsigned long int pmpz_cdiv_qr_ui(unsafe_mpz q, unsafe_mpz r, const unsafe_mpz n, unsigned long int d);
+//unsigned long int pmpz_cdiv_r_ui(unsafe_mpz r, const unsafe_mpz n, unsigned long int d);
+//unsigned long int pmpz_cdiv_ui(const unsafe_mpz n, unsigned long int d);
+//unsigned long int pmpz_fdiv_q_ui(const unsafe_mpz q, const unsafe_mpz n, long unsigned int d);
+//unsigned long int pmpz_fdiv_qr_ui(unsafe_mpz q, unsafe_mpz r, const unsafe_mpz n, long unsigned int d);
+//unsigned long int pmpz_fdiv_r_ui(const unsafe_mpz r, const unsafe_mpz n, long unsigned int d);
+//unsigned long int pmpz_fdiv_ui(const unsafe_mpz n, unsigned long int d);
+//unsigned long int pmpz_mod_ui(unsafe_mpz r, const unsafe_mpz n, unsigned long int d);
+//unsigned long int pmpz_tdiv_q_ui(unsafe_mpz q, const unsafe_mpz n, unsigned long int d);
+//unsigned long int pmpz_tdiv_qr_ui(unsafe_mpz q, unsafe_mpz r, const unsafe_mpz n, unsigned long int d);
+//unsigned long int pmpz_tdiv_r_ui(unsafe_mpz r, const unsafe_mpz n, unsigned long int d);
+//unsigned long int pmpz_tdiv_ui(const unsafe_mpz n, unsigned long int d);
+//void pmpz_cdiv_qr(unsafe_mpz q, unsafe_mpz r, const unsafe_mpz n, const unsafe_mpz d);
+//void pmpz_fdiv_qr(unsafe_mpz q, unsafe_mpz r, const unsafe_mpz n, const unsafe_mpz d);
+//void pmpz_tdiv_qr(unsafe_mpz q, unsafe_mpz r, const unsafe_mpz n, const unsafe_mpz d);
