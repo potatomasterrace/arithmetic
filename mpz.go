@@ -29,13 +29,6 @@ func mpzFromPtr(ptr unsafe.Pointer) Mpz {
 	return m
 }
 
-func (m Mpz) String() string {
-	str := C.pmpz_get_str(*m.ptr, 10)
-	defer free(unsafe.Pointer(str))
-	goStr := C.GoString(str)
-	return goStr
-}
-
 // define clear
 // https://gmplib.org/manual/Integer-Arithmetic
 
