@@ -148,38 +148,34 @@ unsafe_mpz pmpz_mul_ui(const unsafe_mpz op1, unsigned long int op2)
     wrap_mpz_function(mpz_mul_ui, ref(op1), op2);
 }
 
-unsafe_mpz pmpz_unsafe_addmul(const unsafe_mpz rop, const unsafe_mpz op1, const unsigned long int op2)
+void pmpz_unsafe_addmul(unsafe_mpz rop, const unsafe_mpz op1, const unsafe_mpz op2)
 {
     ref_to_pmpz(rop);
     ref_to_pmpz(op1);
     ref_to_pmpz(op2);
     mpz_addmul(ref(rop), ref(op1), ref(op2));
-    return p_rop;
 }
 
-unsafe_mpz pmpz_unsafe_addmul_ui(const unsafe_mpz rop, const unsafe_mpz op1, const unsigned long int op2)
+void pmpz_unsafe_addmul_ui(unsafe_mpz rop, const unsafe_mpz op1, const unsigned long int op2)
 {
     ref_to_pmpz(rop);
     ref_to_pmpz(op1);
     mpz_addmul_ui(ref(rop), ref(op1), op2);
-    return p_rop;
 }
 
-unsafe_mpz pmpz_unsafe_submul(const unsafe_mpz rop, const unsafe_mpz op1, const unsafe_mpz op2)
+void pmpz_unsafe_submul(unsafe_mpz rop, const unsafe_mpz op1, const unsafe_mpz op2)
 {
     ref_to_pmpz(rop);
     ref_to_pmpz(op1);
     ref_to_pmpz(op2);
     mpz_submul(ref(rop), ref(op1), op2);
-    return p_rop;
 }
 
-unsafe_mpz pmpz_unsafe_submul_ui(const unsafe_mpz rop, const unsafe_mpz op1, const unsigned long int op2)
+void pmpz_unsafe_submul_ui(unsafe_mpz rop, const unsafe_mpz op1, const unsigned long int op2)
 {
     ref_to_pmpz(rop);
     ref_to_pmpz(op1);
     mpz_submul_ui(ref(rop), ref(op1), op2);
-    return p_rop;
 }
 
 unsafe_mpz pmpz_mul_2exp(const unsafe_mpz op1, const mp_bitcnt_t op2)

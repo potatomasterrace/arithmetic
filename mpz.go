@@ -36,11 +36,6 @@ func (m Mpz) String() string {
 	return goStr
 }
 
-func (a Mpz) AddMpz(b Mpz) Mpz {
-	ptr := C.pmpz_add(*a.ptr, *b.ptr)
-	return mpzFromPtr(ptr)
-}
-
 // define clear
 // https://gmplib.org/manual/Integer-Arithmetic
 

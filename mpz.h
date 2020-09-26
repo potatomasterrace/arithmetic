@@ -6,11 +6,11 @@
 
 #define p_mpz mpz_t *
 
-#define ref_to_pmpz(ref)          \
-    p_mpz p_ ## ref = (p_mpz) ref;  \
+#define ref_to_pmpz(ref) \
+    p_mpz p_##ref = (p_mpz)ref;
 
-#define ref(value)          \
-    *p_ ## value   \
+#define ref(value) \
+    *p_##value
 
 #define unsafe_mpz void *
 
@@ -42,14 +42,12 @@ unsafe_mpz pmpz_set_si(const signed long int op);
 unsafe_mpz pmpz_set_str(const char *s, const int base);
 unsafe_mpz pmpz_set_ui(const unsigned long int op);
 
-
 // Conversion Functions
 char *pmpz_get_str(const unsafe_mpz n, const int base);
 double pmpz_get_d(const unsafe_mpz op);
 double pmpz_get_d_2exp(signed long int *exp, const unsafe_mpz op);
 signed long int pmpz_get_si(const unsafe_mpz op);
 unsigned long int pmpz_get_ui(const unsafe_mpz op);
-
 
 // Arithmetic Functions
 unsafe_mpz pmpz_abs(const unsafe_mpz op);
@@ -63,11 +61,10 @@ unsafe_mpz pmpz_neg(const unsafe_mpz op);
 unsafe_mpz pmpz_sub(const unsafe_mpz op1, const unsafe_mpz op2);
 unsafe_mpz pmpz_sub_ui(const unsafe_mpz op1, const unsigned long int op2);
 unsafe_mpz pmpz_ui_sub(const unsigned long int op1, const unsafe_mpz op2);
-unsafe_mpz pmpz_unsafe_addmul(const unsafe_mpz rop, const unsafe_mpz op1, const unsigned long int op2);
-unsafe_mpz pmpz_unsafe_addmul_ui(const unsafe_mpz rop, const unsafe_mpz op1, const unsigned long int op2);
-unsafe_mpz pmpz_unsafe_submul(const unsafe_mpz rop, const unsafe_mpz op1, const unsafe_mpz op2);
-unsafe_mpz pmpz_unsafe_submul_ui(const unsafe_mpz rop, const unsafe_mpz op1, const unsigned long int op2);
-
+void pmpz_unsafe_addmul(unsafe_mpz rop, const unsafe_mpz op1, const unsafe_mpz op2);
+void pmpz_unsafe_addmul_ui(unsafe_mpz rop, const unsafe_mpz op1, const unsigned long int op2);
+void pmpz_unsafe_submul(unsafe_mpz rop, const unsafe_mpz op1, const unsafe_mpz op2);
+void pmpz_unsafe_submul_ui(unsafe_mpz rop, const unsafe_mpz op1, const unsigned long int op2);
 
 // Division Functions
 int pmpz_congruent_2exp_p(const unsafe_mpz n, const unsafe_mpz c, mp_bitcnt_t b);
@@ -151,8 +148,6 @@ void pmpz_fib2_ui(unsafe_mpz fn, unsafe_mpz fnsub1, unsigned long int n);
 void pmpz_gcdext(unsafe_mpz g, unsafe_mpz s, unsafe_mpz t, const unsafe_mpz a, const unsafe_mpz b);
 void pmpz_lucnum2_ui(unsafe_mpz ln, unsafe_mpz lnsub1, unsigned long int n);
 
-
-
 // Comparison Functions
 int pmpz_cmp(const unsafe_mpz op1, const unsafe_mpz op2);
 int pmpz_cmp_d(const unsafe_mpz op1, double op2);
@@ -177,8 +172,6 @@ void pmpz_clrbit(unsafe_mpz rop, mp_bitcnt_t bit_index);
 void pmpz_combit(unsafe_mpz rop, mp_bitcnt_t bit_index);
 void pmpz_setbit(const unsafe_mpz op, mp_bitcnt_t bit_index);
 
-
-
 // Input and Output Functions
 size_t pmpz_inp_raw(unsafe_mpz rop, FILE *stream);
 size_t pmpz_inp_str(unsafe_mpz rop, FILE *stream, int base);
@@ -196,7 +189,6 @@ unsafe_mpz pmpz_urandomm(gmp_randstate_t state, const unsafe_mpz n);
 unsafe_mpz pmpz_import(size_t count, int order, size_t size, int endian, size_t nails, const void *op);
 void *pmpz_export(int order, size_t size, int endian, size_t nails, const unsafe_mpz op);
 
-
 // Miscellaneous Functions
 int pmpz_even_p(const unsafe_mpz op);
 int pmpz_fits_sint_p(const unsafe_mpz op);
@@ -206,7 +198,6 @@ int pmpz_fits_uint_p(const unsafe_mpz op);
 int pmpz_fits_ulong_p(const unsafe_mpz op);
 int pmpz_fits_ushort_p(const unsafe_mpz op);
 size_t pmpz_sizeinbase(const unsafe_mpz op, int base);
-
 
 // Special Functions
 size_t pmpz_size(const unsafe_mpz op);
