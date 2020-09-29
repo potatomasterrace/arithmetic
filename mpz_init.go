@@ -1,11 +1,12 @@
 package main
 
-// #cgo LDFLAGS: -lgmp
-// #include "mpz.h"
-import "C"
 import (
 	"unsafe"
 )
+
+// #cgo LDFLAGS: -lgmp
+// #include "mpz.h"
+import "C"
 
 // Initialisation and assignement
 

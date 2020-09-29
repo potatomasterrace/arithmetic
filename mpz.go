@@ -21,11 +21,19 @@ func freeMpz(ptr *unsafe.Pointer) {
 	C.clear_mpz(*ptr)
 }
 
+var cnt = 0
+
 func mpzFromPtr(ptr unsafe.Pointer) Mpz {
 	m := Mpz{
 		ptr: &ptr,
 	}
-	runtime.SetFinalizer(m.ptr, freeMpz)
+	cnt++
+	localCnt := cnt
+	fmt.Println("allocated : ", localCnt, m.Ptr())
+	runtime.SetFinalizer(m.ptr, func(ptr *unsafe.Pointer) {
+		fmt.Println("freeing : ", localCnt, *ptr)
+		freeMpz(ptr)
+	})
 	return m
 }
 
@@ -40,12 +48,23 @@ func CreateMpzFromString(s string, base int) Mpz {
 	return mpzFromPtr(ptr)
 }
 
-func main() {
+func runStuff() {
 	str := ""
-	for i, mpz := 0, CreateMpzFromString("16", 8); i < 100; i++ {
+	for i, mpz := 0, CreateMpzFromString("111", 8); i < 100; i++ {
 		str = mpz.String()
+		for i := 0; i < 1000; i++ {
+			runtime.GC()
+		}
 		mpz = mpz.AddMpz(mpz)
-		fmt.Println("value", str, "ptr", *mpz.ptr)
+		fmt.Println("value", str, "cnt", cnt, "ptr", mpz.ptr)
+	}
+}
+
+func main() {
+	for i := 0; i < 10; i++ {
+		runStuff()
+	}
+	for i := 0; i < 1000; i++ {
 		runtime.GC()
 	}
 }
