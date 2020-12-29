@@ -62,6 +62,41 @@ unsafe_mpz pmpz_ui_pow_ui(unsigned long int base, unsigned long int exp)
     wrap_mpz_function(mpz_ui_pow_ui, base, exp);
 }
 
+unsafe_mpz pmpz_fac_ui(unsigned long int n)
+{
+    wrap_mpz_function(mpz_fac_ui, n);
+}
+
+unsafe_mpz pmpz_2fac_ui(unsigned long int n)
+{
+    wrap_mpz_function(mpz_2fac_ui, n);
+}
+
+unsafe_mpz pmpz_mfac_uiui(unsigned long int n, unsigned long int m)
+{
+    wrap_mpz_function(mpz_mfac_uiui, n, m);
+}
+
+unsafe_mpz pmpz_primorial_ui(unsigned long int n)
+{
+    wrap_mpz_function(mpz_primorial_ui, n);
+}
+
+unsafe_mpz pmpz_bin_ui(const unsafe_mpz n, unsigned long int k)
+{
+    wrap_mpz_function(mpz_bin_ui, n, k);
+}
+
+unsafe_mpz pmpz_bin_uiui(unsigned long int n, unsigned long int k)
+{
+    wrap_mpz_function(mpz_bin_uiui, n, k);
+}
+
+unsafe_mpz pmpz_fib_ui(unsigned long int n)
+{
+    wrap_mpz_function(mpz_fib_ui, n);
+}
+
 
 // Conversion Functions
 // https://gmplib.org/manual/Converting-Integers#Converting-Integers
@@ -641,47 +676,14 @@ int pmpz_ui_kronecker(unsigned long a, const unsafe_mpz b)
     return pmpz_ui_kronecker(a, ref(b));
 }
 
-mp_bitcnt_t pmpz_remove(unsafe_mpz rop, const unsafe_mpz op, const unsafe_mpz f)
+mp_bitcnt_t pmpz_remove(unsafe_mpz rop,const unsafe_mpz op, const unsafe_mpz f)
 {
     ref_to_pmpz(rop);
     ref_to_pmpz(op);
+    ref_to_pmpz(f);
     return mpz_remove(ref(rop), ref(op), ref(f));
 }
 
-unsafe_mpz pmpz_fac_ui(unsigned long int n)
-{
-    wrap_mpz_function(mpz_fac_ui, n);
-}
-
-unsafe_mpz pmpz_2fac_ui(unsigned long int n)
-{
-    wrap_mpz_function(mpz_2fac_ui, n);
-}
-
-unsafe_mpz pmpz_mfac_uiui(unsigned long int n, unsigned long int m)
-{
-    wrap_mpz_function(mpz_mfac_uiui, n, m);
-}
-
-unsafe_mpz pmpz_primorial_ui(unsigned long int n)
-{
-    wrap_mpz_function(mpz_primorial_ui, n);
-}
-
-unsafe_mpz pmpz_bin_ui(const unsafe_mpz n, unsigned long int k)
-{
-    wrap_mpz_function(mpz_bin_ui, n, k);
-}
-
-unsafe_mpz pmpz_bin_uiui(unsigned long int n, unsigned long int k)
-{
-    wrap_mpz_function(mpz_bin_uiui, n, k);
-}
-
-unsafe_mpz pmpz_fib_ui(unsigned long int n)
-{
-    wrap_mpz_function(mpz_fib_ui, n);
-}
 
 void pmpz_fib2_ui(unsafe_mpz fn, unsafe_mpz fnsub1, unsigned long int n)
 {
