@@ -55,3 +55,9 @@ func MpzFromUi(op C.ulong) Mpz {
 	ptr := C.pmpz_set_ui(op)
 	return mpzFromPtr(ptr)
 }
+
+// unsafe_mpz pmpz_ui_pow_ui(unsigned long int base, unsigned long int exp);
+func (m Mpz) MpzFromUiPowUi(base C.ulong, exp C.ulong) Mpz {
+	ptr := C.pmpz_ui_pow_ui(base, exp)
+	return mpzFromPtr(ptr)
+}
