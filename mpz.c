@@ -57,6 +57,11 @@ unsafe_mpz pmpz_set_str(const char *s, const int base)
 
     return rop;
 }
+unsafe_mpz pmpz_ui_pow_ui(unsigned long int base, unsigned long int exp)
+{
+    wrap_mpz_function(mpz_ui_pow_ui, base, exp);
+}
+
 
 // Conversion Functions
 // https://gmplib.org/manual/Converting-Integers#Converting-Integers
@@ -487,11 +492,6 @@ unsafe_mpz pmpz_pow_ui(const unsafe_mpz base, unsigned long int exp)
     wrap_mpz_function(mpz_pow_ui, ref(base), exp);
 }
 
-unsafe_mpz pmpz_ui_pow_ui(unsigned long int base, unsigned long int exp)
-{
-    wrap_mpz_function(mpz_ui_pow_ui, base, exp);
-}
-
 // Root Extraction Functions
 // https://gmplib.org/manual/Integer-Roots#Integer-Roots
 
@@ -641,11 +641,11 @@ int pmpz_ui_kronecker(unsigned long a, const unsafe_mpz b)
     return pmpz_ui_kronecker(a, ref(b));
 }
 
-mp_bitcnt_t pmpz_remove(unsafe_mpz rop, const unsafe_mpz op, const mpz_t f)
+mp_bitcnt_t pmpz_remove(unsafe_mpz rop, const unsafe_mpz op, const unsafe_mpz f)
 {
     ref_to_pmpz(rop);
     ref_to_pmpz(op);
-    return mpz_remove(ref(rop), ref(op), f);
+    return mpz_remove(ref(rop), ref(op), ref(f));
 }
 
 unsafe_mpz pmpz_fac_ui(unsigned long int n)
