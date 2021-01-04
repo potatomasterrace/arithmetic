@@ -61,7 +61,7 @@ func (m Mpz) MpzRemove(op Mpz, f Mpz) C.ulong {
 }
 
 // unsafe_mpz pmpz_bin_ui(const unsafe_mpz n, unsigned long int k);
-func (m Mpz) MpzB(n C.ulong) Mpz {
+func (m Mpz) MpzBinUi(n C.ulong) Mpz {
 	ptr := C.pmpz_2fac_ui(n)
 	return mpzFromPtr(ptr)
 }
