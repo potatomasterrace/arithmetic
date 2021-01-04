@@ -73,10 +73,53 @@ func (m Mpz) MpzBinUiUi(n C.ulong, k C.ulong) Mpz {
 }
 
 // unsafe_mpz pmpz_gcd(const unsafe_mpz op1, const unsafe_mpz op2);
+func (op1 Mpz) MpzGcd(op2 Mpz) Mpz {
+	ptr := C.pmpz_gcd(op1.Ptr(), op2.Ptr())
+	return mpzFromPtr(ptr)
+}
+
 // unsafe_mpz pmpz_lcm(const unsafe_mpz op1, const unsafe_mpz op2);
+func (op1 Mpz) MpzLcm(op2 Mpz) Mpz {
+	ptr := C.pmpz_lcm(op1.Ptr(), op2.Ptr())
+	return mpzFromPtr(ptr)
+}
+
 // unsafe_mpz pmpz_lcm_ui(const unsafe_mpz op1, unsigned long op2);
+func (op1 Mpz) MpzLcmUi(op2 C.ulong) Mpz {
+	ptr := C.pmpz_lcm_ui(op1.Ptr(), op2)
+	return mpzFromPtr(ptr)
+}
+
 // unsafe_mpz pmpz_nextprime(const unsafe_mpz op);
+func (op Mpz) MpzNextPrime() Mpz {
+	ptr := C.pmpz_nextprime(op.Ptr())
+	return mpzFromPtr(ptr)
+}
+
 // unsigned long int pmpz_gcd_ui(unsafe_mpz rop, const unsafe_mpz op1, unsigned long int op2);
+func (op1 Mpz) MpzGcdUi(op2 C.ulong) Mpz {
+	rop := MpzInit()
+	C.pmpz_gcd_ui(rop.Ptr(), op1.Ptr(), op2)
+	return rop
+}
+
 // void pmpz_fib2_ui(unsafe_mpz fn, unsafe_mpz fnsub1, unsigned long int n);
+func MpzFib2Ui(n C.ulong) (fn Mpz, fnSub1 Mpz) {
+	fn, fnSub1 = MpzInit(), MpzInit()
+	C.pmpz_fib2_ui(fn.Ptr(), fnSub1.Ptr(), n)
+	return fn, fnSub1
+}
+
 // void pmpz_gcdext(unsafe_mpz g, unsafe_mpz s, unsafe_mpz t, const unsafe_mpz a, const unsafe_mpz b);
+func MpzGcdext(a Mpz, b Mpz) (g Mpz, s Mpz, t Mpz) {
+	g, s, t = MpzInit(), MpzInit(), MpzInit()
+	C.pmpz_gcdext(g.Ptr(), s.Ptr(), t.Ptr(), a.Ptr(), b.Ptr())
+	return g, s, t
+}
+
 // void pmpz_lucnum2_ui(unsafe_mpz ln, unsafe_mpz lnsub1, unsigned long int n);
+func MpzLucNum2Ui(n C.ulong) (ln Mpz, lnsub1 Mpz) {
+	ln, lnsub1 = MpzInit(), MpzInit()
+	C.pmpz_lucnum2_ui(ln.Ptr(), lnsub1.Ptr(), n)
+	return ln, lnsub1
+}
