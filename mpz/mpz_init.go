@@ -103,8 +103,16 @@ func MpzMFacUiUi(n C.ulong, m C.ulong) Mpz {
 }
 
 // unsafe_mpz pmpz_nextprime(const unsafe_mpz op);
+func (op Mpz) MpzNextPrime() Mpz {
+	ptr := C.pmpz_nextprime(op.Ptr())
+	return mpzFromPtr(ptr)
+}
+
 // unsafe_mpz pmpz_primorial_ui(unsigned long int n);
-// unsafe_mpz pmpz_primorial_ui(unsigned long int n);
+func MpzPrimordialUi(n C.ulong) Mpz {
+	ptr := C.pmpz_primorial_ui(n)
+	return mpzFromPtr(ptr)
+}
 
 // TODO After mpq
 // unsafe_mpz pmpz_set_quotient(const mpq_t op)Mpz{ }
