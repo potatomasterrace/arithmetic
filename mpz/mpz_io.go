@@ -1,4 +1,4 @@
-package main
+package mpz
 
 // Input and Output Functions
 // size_t pmpz_inp_raw(unsafe_mpz rop, FILE *stream);

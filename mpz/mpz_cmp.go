@@ -1,4 +1,4 @@
-package main
+package mpz
 
 // #cgo LDFLAGS: -lgmp
 // #include "mpz.h"

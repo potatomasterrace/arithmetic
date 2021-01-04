@@ -1,9 +1,16 @@
-compiler = gcc
 
+SHELL := /bin/bash
+buildDir= ./build
+buildExec= $(buildDir)/mpz
 
-run:
-	go build -o build/mpz
-	./build/mpz
+clean:
+	rm -rf $(buildDir)/*
+
+compile: clean
+	echo "compiling" &&	time go build -o $(buildExec)
+
+run: clean compile
+	$(buildExec)
 
 valgrind: 
 	go build -o build/mpz
