@@ -6,8 +6,8 @@ import "C"
 
 // OK
 // Number Theoretic Functions
-// int pmpz_invert(unsafe_mpz rop, const unsafe_mpz op1, const unsafe_mpz op2);
 
+// int pmpz_invert(unsafe_mpz rop, const unsafe_mpz op1, const unsafe_mpz op2);
 func (m Mpz) MpzInvert(op Mpz) (Mpz, C.int) {
 	rop := MpzInit()
 	r := C.pmpz_invert(rop.Ptr(), m.Ptr(), op.Ptr())
