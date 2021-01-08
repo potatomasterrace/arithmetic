@@ -15,6 +15,13 @@ type Mpz struct {
 func (a Mpz) Ptr() unsafe.Pointer {
 	return *a.ptr
 }
-func freeMpz(ptr *unsafe.Pointer) {
-	C.clear_mpz(*ptr)
+
+func mpzFromPtr(ptr unsafe.Pointer) Mpz {
+	m := Mpz{
+		ptr: &ptr,
+	}
+	defer RegisterPtrReference(m.ptr, func(ptr *unsafe.Pointer) {
+		C.clear_mpz(*ptr)
+	})
+	return m
 }

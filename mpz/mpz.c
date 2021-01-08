@@ -1,5 +1,21 @@
 #include "mpz.h"
 
+// Macro for initializing mpz
+#define p_mpz_init(value)                \
+    /* allocate memory for reference */  \
+    p_mpz value = malloc(sizeof(mpz_t)); \
+    /* initialize mpz pointer  */        \
+    mpz_init(*value);
+
+// Macro for wrapping mpz functions
+#define wrap_mpz_function(func, ...) \
+    /* init return reference*/       \
+    p_mpz_init(rop);                 \
+    /* Call func */                  \
+    func(*rop, __VA_ARGS__);         \
+    /* return casted value */        \
+    return (unsafe_mpz)rop;
+
 void clear_mpz(const unsafe_mpz value)
 {
     p_mpz num = (p_mpz)value;

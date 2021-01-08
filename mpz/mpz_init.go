@@ -1,8 +1,6 @@
 package mpz
 
 import (
-	"fmt"
-	"runtime"
 	"unsafe"
 )
 
@@ -18,20 +16,6 @@ func MpzInit() Mpz {
 }
 
 var cnt = 0
-
-func mpzFromPtr(ptr unsafe.Pointer) Mpz {
-	m := Mpz{
-		ptr: &ptr,
-	}
-	cnt++
-	localCnt := cnt
-	fmt.Println("allocated : ", localCnt, m.Ptr())
-	runtime.SetFinalizer(m.ptr, func(ptr *unsafe.Pointer) {
-		fmt.Println("freeing : ", localCnt, *ptr)
-		freeMpz(ptr)
-	})
-	return m
-}
 
 // unsafe_mpz pmpz_set_str(const char *s, const int base)Mpz{ }
 func MpzFromString(s string, base int) Mpz {

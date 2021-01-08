@@ -16,16 +16,14 @@ func runStuff() {
 	str := ""
 	for i, mpz := 0, MpzFromString("111", 8); i < 5; i++ {
 		str = mpz.String()
-		for i := 0; i < 1000; i++ {
-			runtime.GC()
-		}
 		mpz = mpz.AddMpz(mpz)
-		fmt.Println("value", str, "ptr", mpz.Ptr())
+		fmt.Println("created ptr", mpz.Ptr(), "value", str)
+		runtime.GC()
 	}
 }
 
 func main() {
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 2; i++ {
 		runStuff()
 	}
 	for i := 0; i < 1000; i++ {
