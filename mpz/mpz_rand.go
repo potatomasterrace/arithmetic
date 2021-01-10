@@ -1,20 +1,19 @@
 package mpz
 
-// #cgo LDFLAGS: -lgmp
 // #include "mpz.h"
 import "C"
 
 // Random Number Functions
 // Standby
 // unsafe_mpz pmpz_random(mp_size_t max_size);
-func MpzRandom(maxSize C.long) Mpz {
-	ptr := C.pmpz_random(maxSize)
+func MpzRandom(maxSize uint64) Mpz {
+	ptr := C.pmpz_random(C.long(maxSize))
 	return mpzFromPtr(ptr)
 }
 
 // unsafe_mpz pmpz_random2(mp_size_t max_size);
-func MpzRandom2(maxSize C.long) Mpz {
-	ptr := C.pmpz_random2(maxSize)
+func MpzRandom2(maxSize uint64) Mpz {
+	ptr := C.pmpz_random2(C.long(maxSize))
 	return mpzFromPtr(ptr)
 }
 

@@ -1,9 +1,10 @@
 package mpz
 
-// #cgo LDFLAGS: -lgmp
 // #include "mpz.h"
 import "C"
 
+// TODO add buffer compatibility layer
+-wincompatible-pointer-types
 // Input and Output Functions
 // size_t pmpz_inp_raw(unsafe_mpz rop, FILE *stream);
 func MpzInpRaw(stream *C.FILE) (rop Mpz, size C.size_t) {

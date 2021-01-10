@@ -1,11 +1,12 @@
 #include "mpz.h"
+#include "../memory/management.h"
 
 // Macro for initializing mpz
 #define p_mpz_init(value)                \
     /* allocate memory for reference */  \
-    p_mpz value = malloc(sizeof(mpz_t)); \
+    MALLOC_PROXY(p_mpz,"mpz",value,sizeof(mpz_t)); \
     /* initialize mpz pointer  */        \
-    mpz_init(*value);
+    mpz_init((mpz_t * )value);
 
 // Macro for wrapping mpz functions
 #define wrap_mpz_function(func, ...) \
@@ -20,7 +21,7 @@ void clear_mpz(const unsafe_mpz value)
 {
     p_mpz num = (p_mpz)value;
     mpz_clear(*num);
-    free(num);
+    FREE_PROXY("mpz",num);
 }
 
 // Initialisation and assignement

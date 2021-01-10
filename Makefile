@@ -7,7 +7,7 @@ clean:
 	rm -rf $(buildDir)/*
 
 compile: clean
-	echo "compiling" &&	time go build -o $(buildExec)
+	echo "compiling" &&	time go build -a -o $(buildExec)
 
 run: clean compile
 	$(buildExec)

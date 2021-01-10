@@ -2,15 +2,15 @@ package mpz
 
 import "unsafe"
 
-// #cgo LDFLAGS: -lgmp
 // #include "mpz.h"
+// #include <malloc.h>
 import "C"
 
 // Conversion Functions
 // char *pmpz_get_str(const unsafe_mpz n, const int base);
 func (m Mpz) GetString(base C.int) string {
 	str := C.pmpz_get_str(m.Ptr(), base)
-	defer free(unsafe.Pointer(str))
+	defer C.free(unsafe.Pointer(str))
 	goStr := C.GoString(str)
 	return goStr
 }

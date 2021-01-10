@@ -6,6 +6,9 @@ import (
 
 // #cgo LDFLAGS: -lgmp
 // #include "mpz.h"
+// void free_str(void* ptr){
+//	FREE_PROXY("str",ptr);
+// }
 import "C"
 
 // Initialisation and assignement
@@ -20,7 +23,7 @@ var cnt = 0
 // unsafe_mpz pmpz_set_str(const char *s, const int base)Mpz{ }
 func MpzFromString(s string, base int) Mpz {
 	cStr := C.CString(s)
-	defer free(unsafe.Pointer(cStr))
+	defer C.free_str(unsafe.Pointer(cStr))
 	cBase := C.int(base)
 	ptr := C.pmpz_set_str(cStr, cBase)
 	return mpzFromPtr(ptr)

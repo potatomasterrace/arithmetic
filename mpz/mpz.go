@@ -1,10 +1,12 @@
 package mpz
 
 import (
+	"runtime"
 	"unsafe"
 )
 
-// #cgo LDFLAGS: -lgmp
+// #cgo LDFLAGS: -lgmp -L${SRCDIR}/memory
+// #cgo CFLAGS: -I${SRCDIR}/memory -Wno-incompatible-pointer-types
 // #include "mpz.h"
 import "C"
 
@@ -20,8 +22,8 @@ func mpzFromPtr(ptr unsafe.Pointer) Mpz {
 	m := Mpz{
 		ptr: &ptr,
 	}
-	defer RegisterPtrReference(m.ptr, func(ptr *unsafe.Pointer) {
-		C.clear_mpz(*ptr)
+	defer runtime.SetFinalizer(m.ptr, func(ptr *unsafe.Pointer) {
+		go C.clear_mpz(*ptr)
 	})
 	return m
 }

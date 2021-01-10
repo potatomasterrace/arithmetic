@@ -1,6 +1,5 @@
 package randstate
 
-// #cgo LDFLAGS: -lgmp
 // #include <gmp.h>
 import "C"
 

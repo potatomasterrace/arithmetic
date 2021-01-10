@@ -1,6 +1,5 @@
 package mpz
 
-// #cgo LDFLAGS: -lgmp
 // #include "mpz.h"
 import "C"
 

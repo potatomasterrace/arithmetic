@@ -13,12 +13,26 @@ import "C"
 // https://gmplib.org/manual/Integer-Arithmetic
 
 func runStuff() {
-	str := ""
-	for i, mpz := 0, MpzFromString("111", 8); i < 5; i++ {
-		str = mpz.String()
-		mpz = mpz.AddMpz(mpz)
-		fmt.Println("created ptr", mpz.Ptr(), "value", str)
-		runtime.GC()
+	collect := make([]Mpz, 0)
+	for i, mpz := 0, MpzFromString("111", 8); i < 100; i++ {
+		//str = mpz.String()
+		//fmt.Println("created ptr", mpz_cpy.Ptr(), "value", str)
+		fmt.Println(mpz.String())
+		mpz_cpy := mpz
+
+		go func() {
+			if i%2 == 0 {
+				collect = append(collect, mpz_cpy)
+			} else if i%3 == 0 {
+				mpz = mpz.AddMpz((mpz_cpy))
+			} else if i%5 == 0 {
+				mpz_cpy = mpz.AddMpz((mpz_cpy))
+			}
+		}()
+		for j := 0; j < 10; j++ {
+			runtime.GC()
+		}
+		mpz = mpz_cpy
 	}
 }
 
@@ -26,7 +40,8 @@ func main() {
 	for i := 0; i < 2; i++ {
 		runStuff()
 	}
-	for i := 0; i < 1000; i++ {
+	for i := 0; i < 2; i++ {
 		runtime.GC()
 	}
+	fmt.Println("done")
 }

@@ -3,6 +3,7 @@
 
 #include <gmp.h>
 #include <malloc.h>
+#include "../memory/management.h"
 
 #define p_mpz mpz_t *
 

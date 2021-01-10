@@ -2,7 +2,6 @@ package mpz
 
 import "unsafe"
 
-// #cgo LDFLAGS: -lgmp
 // #include "mpz.h"
 import "C"
 
