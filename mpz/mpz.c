@@ -1,28 +1,4 @@
 #include "mpz.h"
-#include "../memory/management.h"
-
-// Macro for initializing mpz
-#define p_mpz_init(value)                \
-    /* allocate memory for reference */  \
-    MALLOC_PROXY(p_mpz,"mpz",value,sizeof(mpz_t)); \
-    /* initialize mpz pointer  */        \
-    mpz_init((mpz_t * )value);
-
-// Macro for wrapping mpz functions
-#define wrap_mpz_function(func, ...) \
-    /* init return reference*/       \
-    p_mpz_init(rop);                 \
-    /* Call func */                  \
-    func(*rop, __VA_ARGS__);         \
-    /* return casted value */        \
-    return (unsafe_mpz)rop;
-
-void clear_mpz(const unsafe_mpz value)
-{
-    p_mpz num = (p_mpz)value;
-    mpz_clear(*num);
-    FREE_PROXY("mpz",num);
-}
 
 // Initialisation and assignement
 // https://gmplib.org/manual/Assigning-Integers#Assigning-Integers
@@ -115,6 +91,14 @@ unsafe_mpz pmpz_fib_ui(unsigned long int n)
 }
 
 
+void clear_mpz(const unsafe_mpz value)
+{
+    p_mpz num = (p_mpz)value;
+    mpz_clear(*num);
+    FREE_PROXY("mpz",num);
+}
+
+
 // Conversion Functions
 // https://gmplib.org/manual/Converting-Integers#Converting-Integers
 
@@ -145,7 +129,7 @@ double pmpz_get_d_2exp(signed long int *exp, const unsafe_mpz op)
 char *pmpz_get_str(const unsafe_mpz n, const int base)
 {
     ref_to_pmpz(n);
-    int str_len = mpz_sizeinbase(ref(n), base) + 2;
+    int str_len = mpz_sizeinbase(ref(n), base) + 1;
     char *str = (char *)malloc(str_len);
     mpz_get_str(str, base, ref(n));
     return str;

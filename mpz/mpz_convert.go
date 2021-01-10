@@ -1,6 +1,8 @@
 package mpz
 
-import "unsafe"
+import (
+	"unsafe"
+)
 
 // #include "mpz.h"
 // #include <malloc.h>

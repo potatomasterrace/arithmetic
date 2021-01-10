@@ -22,10 +22,9 @@
 
 
 #define FREE_PROXY(type, ptr)                 \
-  ({                                          \
   printf(PTR_FREE_MESSAGE, type,(void*) ptr); \
   free(ptr);                                  \
-  })                                          \
 
+# define FREE_PROXY_DECLARATION \
 
 #endif /* ARTITHMETIC_MEMORY_MANAGEMENT_H */
