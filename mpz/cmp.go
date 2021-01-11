@@ -25,7 +25,7 @@ func (m Mpz) CmpUiMpz(val C.ulong) C.int {
 }
 
 // int pmpz_cmpabs(const unsafe_mpz op1, const unsafe_mpz op2);
-func (m Mpz) CmpAbsMpz(mpz Mpz) C.int {
+func (m Mpz) CmpAbs(mpz Mpz) C.int {
 	return C.pmpz_cmpabs(m.Ptr(), mpz.Ptr())
 }
 

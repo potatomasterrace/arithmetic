@@ -24,9 +24,9 @@ func runStuff() {
 			if i%2 == 0 {
 				collect = append(collect, mpz_cpy)
 			} else if i%3 == 0 {
-				mpz = mpz.AddMpz((mpz_cpy))
+				mpz = mpz.Add((mpz_cpy))
 			} else if i%5 == 0 {
-				mpz_cpy = mpz.AddMpz((mpz_cpy))
+				mpz_cpy = mpz.Add((mpz_cpy))
 			}
 		}()
 		for j := 0; j < 10; j++ {

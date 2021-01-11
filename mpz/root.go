@@ -19,7 +19,7 @@ func (m Mpz) MpzRoot() C.int {
 }
 
 // unsafe_mpz pmpz_sqrt(const unsafe_mpz op);
-func (m Mpz) MpzSqrt() Mpz {
+func (m Mpz) MpzSqrt() (Mpz, error) {
 	ptr := C.pmpz_sqrt(m.Ptr())
 	return mpzFromPtr(ptr)
 }

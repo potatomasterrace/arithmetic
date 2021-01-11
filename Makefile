@@ -15,3 +15,6 @@ run: clean compile
 valgrind: 
 	go build -o build/mpz
 	valgrind --leak-check=full --show-leak-kinds=all ./build/mpz
+
+test:
+	go test ./mpz -cover

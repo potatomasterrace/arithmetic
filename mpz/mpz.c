@@ -47,7 +47,6 @@ unsafe_mpz pmpz_set_str(const char *s, const int base)
     {
         return (unsafe_mpz)0;
     }
-
     return rop;
 }
 unsafe_mpz pmpz_ui_pow_ui(unsigned long int base, unsigned long int exp)

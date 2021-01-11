@@ -1,31 +1,25 @@
-#ifndef GO_MPZ_H
-#define GO_MPZ_H
+#ifndef GO_RANDSTATE_H
+#define GO_RANDSTATE_H
 
 #include <gmp.h>
 #include <malloc.h>
 
-#define p_mpz mpz_t *
+#define p_randstate gmp_randstate_t *
 
-#define ref_to_pmpz(ref) \
-    p_mpz p_##ref = (p_mpz)ref;
+#define ref_to_gmp(ref) \
+    p_randstate p_##ref = (p_randstate)ref;
 
 #define ref(value) \
     *p_##value
 
-#define unsafe_mpz void *
+#define unsafe_randstate void *
 
 // Macro for initializing mpz
-#define p_mpz_init(value)                \
+#define p_randstate_init(value)                \
     /* allocate memory for reference */  \
-    MALLOC_PROXY(p_mpz,"mpz",value,sizeof(mpz_t)); \
+    MALLOC_PROXY(p_randstate,"rnd",value,sizeof(gmp_randstate_t)); \
     /* initialize mpz pointer  */        \
-    mpz_init((mpz_t * )value);
+    mpz_init(value);
 
-// Macro for wrapping mpz functions
-#define wrap_mpz_function(func, ...) \
-    /* init return reference*/       \
-    p_mpz_init(rop);                 \
-    /* Call func */                  \
-    func(*rop, __VA_ARGS__);         \
-    /* return casted value */        \
-    return (unsafe_mpz)rop;
+
+#endif /* GO_RANDSTATE_H */

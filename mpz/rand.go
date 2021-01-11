@@ -6,13 +6,13 @@ import "C"
 // Random Number Functions
 // Standby
 // unsafe_mpz pmpz_random(mp_size_t max_size);
-func MpzRandom(maxSize uint64) Mpz {
+func MpzRandom(maxSize uint64) (Mpz, error) {
 	ptr := C.pmpz_random(C.long(maxSize))
 	return mpzFromPtr(ptr)
 }
 
 // unsafe_mpz pmpz_random2(mp_size_t max_size);
-func MpzRandom2(maxSize uint64) Mpz {
+func MpzRandom2(maxSize uint64) (Mpz, error) {
 	ptr := C.pmpz_random2(C.long(maxSize))
 	return mpzFromPtr(ptr)
 }
