@@ -29,7 +29,7 @@ func (op1 Mpz) AddMany(ops ...Mpz) (Mpz, error) {
 
 // Add op1 to op2 and return the result.
 // underlying gmp function : mpz_add_ui
-func (op1 Mpz) AddUi(op2 uint32) (Mpz, error) {
+func (op1 Mpz) AddUi(op2 uint) (Mpz, error) {
 	ptr := C.pmpz_add_ui(op1.Ptr(), C.ulong(op2))
 	return mpzFromPtr(ptr)
 }
@@ -57,14 +57,14 @@ func (op1 Mpz) SubMany(ops ...Mpz) (Mpz, error) {
 
 // Substract op1 to op2 and return the result.
 // underlying gmp function : mpz_sub_ui
-func (op1 Mpz) SubUi(op2 uint32) (Mpz, error) {
+func (op1 Mpz) SubUi(op2 uint) (Mpz, error) {
 	ptr := C.pmpz_sub_ui(op1.Ptr(), C.ulong(op2))
 	return mpzFromPtr(ptr)
 }
 
 // Substract op1 to op2 and return the result.
 // underlying gmp function : mpz_ui_sub
-func (op2 Mpz) UiSub(op1 uint32) (Mpz, error) {
+func (op2 Mpz) UiSub(op1 uint) (Mpz, error) {
 	ptr := C.pmpz_ui_sub(C.ulong(op1), op2.Ptr())
 	return mpzFromPtr(ptr)
 }
@@ -92,14 +92,14 @@ func (op1 Mpz) MulMany(ops ...Mpz) (Mpz, error) {
 
 // Multiply op1 times op2 and return the result.
 // underlying gmp function : mpz_mul_si
-func (op1 Mpz) MulSi(op2 int32) (Mpz, error) {
+func (op1 Mpz) MulSi(op2 int) (Mpz, error) {
 	ptr := C.pmpz_mul_si(op1.Ptr(), C.long(op2))
 	return mpzFromPtr(ptr)
 }
 
 // Multiply op1 times op2 and return the result.
 // underlying gmp function : mpz_mul_ui
-func (op1 Mpz) MulUi(op2 uint32) (Mpz, error) {
+func (op1 Mpz) MulUi(op2 uint) (Mpz, error) {
 	ptr := C.pmpz_mul_ui(op1.Ptr(), C.ulong(op2))
 	return mpzFromPtr(ptr)
 }
@@ -117,7 +117,7 @@ func (m Mpz) AddMul(op1 Mpz, op2 Mpz) (Mpz, error) {
 
 // AddMulUi returns m+op1 times op2 .
 // underlying gmp function : mpz_unsafe_addmul_ui
-func (m Mpz) AddMulUi(op1 Mpz, op2 uint32) (Mpz, error) {
+func (m Mpz) AddMulUi(op1 Mpz, op2 uint) (Mpz, error) {
 	mCopy, err := MpzFromMpz(m)
 	if err != nil {
 		return mCopy, err
@@ -139,7 +139,7 @@ func (m Mpz) SubMul(op1 Mpz, op2 Mpz) (Mpz, error) {
 
 // SubMulUi returns m-op1 times op2 .
 // underlying gmp function : mpz_unsafe_submul_ui
-func (m Mpz) SubMulUi(op1 Mpz, op2 uint32) (Mpz, error) {
+func (m Mpz) SubMulUi(op1 Mpz, op2 uint) (Mpz, error) {
 	mCopy, err := MpzFromMpz(m)
 	if err != nil {
 		return mCopy, err
@@ -150,7 +150,7 @@ func (m Mpz) SubMulUi(op1 Mpz, op2 uint32) (Mpz, error) {
 
 // Mul2Exp returns m-op1 times op2 .
 // underlying gmp function : mpz_mul_2exp
-func (op1 Mpz) Mul2Exp(op2 uint32) (Mpz, error) {
+func (op1 Mpz) Mul2Exp(op2 uint) (Mpz, error) {
 	ptr := C.pmpz_mul_2exp(op1.Ptr(), C.ulong(op2))
 	return mpzFromPtr(ptr)
 }
