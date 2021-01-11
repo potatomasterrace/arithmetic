@@ -717,13 +717,13 @@ int pmpz_cmp(const unsafe_mpz op1, const unsafe_mpz op2)
 int pmpz_cmp_d(const unsafe_mpz op1, double op2)
 {
     ref_to_pmpz(op1);
-    return pmpz_cmp_d(ref(op1), op2);
+    return mpz_cmp_d(ref(op1), op2);
 }
 
 int pmpz_cmp_si(const unsafe_mpz op1, signed long int op2)
 {
     ref_to_pmpz(op1);
-    return pmpz_cmp_si(ref(op1), op2);
+    return mpz_cmp_si(ref(op1), op2);
 }
 
 int pmpz_cmp_ui(const unsafe_mpz op1, unsigned long int op2)
