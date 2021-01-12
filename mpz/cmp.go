@@ -4,50 +4,59 @@ package mpz
 import "C"
 
 // Comparison Functions
-// int pmpz_cmp(const unsafe_mpz op1, const unsafe_mpz op2);
-func (m Mpz) Cmp(mpz Mpz) int {
-	ret := C.pmpz_cmp(m.Ptr(), mpz.Ptr())
+
+// Cmp compares op1 and op2. Return a positive value if op1 > op2, zero if op1 = op2, or a negative value if op1 < op2.
+// underlying gmp function : mpz_cmp
+func (op1 Mpz) Cmp(op2 Mpz) int {
+	ret := C.pmpz_cmp(op1.Ptr(), op2.Ptr())
 	return int(ret)
 }
 
-// int pmpz_cmp_d(const unsafe_mpz op1, double op2);
-func (m Mpz) CmpD(val int) int {
-	ret := C.pmpz_cmp_d(m.Ptr(), C.double(val))
+// CmpD compares op1 and op2. Return a positive value if op1 > op2, zero if op1 = op2, or a negative value if op1 < op2.
+// underlying gmp function : mpz_cmp_d
+func (op1 Mpz) CmpD(op2 float64) int {
+	ret := C.pmpz_cmp_d(op1.Ptr(), C.double(op2))
 	return int(ret)
 }
 
-// int pmpz_cmp_si(const unsafe_mpz op1, signed long int op2);
-func (m Mpz) CmpSi(val int) int {
-	ret := C.pmpz_cmp_si(m.Ptr(), C.long(val))
+// CmpSi compares op1 and op2. Return a positive value if op1 > op2, zero if op1 = op2, or a negative value if op1 < op2.
+// underlying gmp function : mpz_cmp_si
+func (op1 Mpz) CmpSi(op2 int) int {
+	ret := C.pmpz_cmp_si(op1.Ptr(), C.long(op2))
 	return int(ret)
 }
 
-// int pmpz_cmp_ui(const unsafe_mpz op1, unsigned long int op2);
-func (m Mpz) CmpUi(val uint) int {
-	ret := C.pmpz_cmp_ui(m.Ptr(), C.ulong(val))
+// CmpUi compares op1 and op2. Return a positive value if op1 > op2, zero if op1 = op2, or a negative value if op1 < op2.
+// underlying gmp function : mpz_cmp_ui
+func (op1 Mpz) CmpUi(op2 uint) int {
+	ret := C.pmpz_cmp_ui(op1.Ptr(), C.ulong(op2))
 	return int(ret)
 }
 
-// int pmpz_cmpabs(const unsafe_mpz op1, const unsafe_mpz op2);
-func (m Mpz) CmpAbs(mpz Mpz) int {
-	ret := C.pmpz_cmpabs(m.Ptr(), mpz.Ptr())
+// CmpAbs compares op1 and op2. Return a positive value if op1 > op2, zero if op1 = op2, or a negative value if op1 < op2.
+// underlying gmp function : mpz_cmpabs
+func (op1 Mpz) CmpAbs(op2 Mpz) int {
+	ret := C.pmpz_cmpabs(op1.Ptr(), op2.Ptr())
 	return int(ret)
 }
 
-// int pmpz_cmpabs_d(const unsafe_mpz op1, double op2);
-func (m Mpz) CmpAbsD(val float64) int {
-	ret := C.pmpz_cmpabs_d(m.Ptr(), C.double(val))
+// CmpAbsD compares op1 and op2. Return a positive value if op1 > op2, zero if op1 = op2, or a negative value if op1 < op2.
+// underlying gmp function : mpz_cmpabs_d
+func (op1 Mpz) CmpAbsD(op2 float64) int {
+	ret := C.pmpz_cmpabs_d(op1.Ptr(), C.double(op2))
 	return int(ret)
 }
 
-// int pmpz_cmpabs_ui(const unsafe_mpz op1, unsigned long int op2);
-func (m Mpz) CmpAbsUi(val uint) int {
-	ret := C.pmpz_cmpabs_ui(m.Ptr(), C.ulong(val))
+// CmpAbsUi compares op1 and op2. Return a positive value if op1 > op2, zero if op1 = op2, or a negative value if op1 < op2.
+// underlying gmp function : mpz_cmpabs_ui
+func (op1 Mpz) CmpAbsUi(op2 uint) int {
+	ret := C.pmpz_cmpabs_ui(op1.Ptr(), C.ulong(op2))
 	return int(ret)
 }
 
-// int pmpz_sgn(const unsafe_mpz op);
-func (m Mpz) Sign() int {
-	ret := C.pmpz_sgn(m.Ptr())
+// Sign compares op1 and op2. Return a positive value if op1 > op2, zero if op1 = op2, or a negative value if op1 < op2.
+// underlying gmp function : mpz_cmp_d
+func (op Mpz) Sign() int {
+	ret := C.pmpz_sgn(op.Ptr())
 	return int(ret)
 }
