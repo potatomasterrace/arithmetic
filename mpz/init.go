@@ -28,8 +28,8 @@ func MpzFromString(s string, base int) (Mpz, error) {
 }
 
 // unsafe_mpz pmpz_set_double(const double op)Mpz{ }
-func MpzFromDouble(op C.double) (Mpz, error) {
-	ptr := C.pmpz_set_double(op)
+func MpzFromDouble(op float64) (Mpz, error) {
+	ptr := C.pmpz_set_double(C.double(op))
 	return mpzFromPtr(ptr)
 }
 
