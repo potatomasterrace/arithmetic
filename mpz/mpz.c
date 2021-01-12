@@ -485,14 +485,14 @@ int pmpz_congruent_p(const unsafe_mpz n, const unsafe_mpz c, const unsafe_mpz d)
 int pmpz_congruent_ui_p(const unsafe_mpz n, unsigned long int c, unsigned long int d)
 {
     ref_to_pmpz(n);
-    return pmpz_congruent_ui_p(ref(n), c, d);
+    return mpz_congruent_ui_p(ref(n), c, d);
 }
 
 int pmpz_congruent_2exp_p(const unsafe_mpz n, const unsafe_mpz c, mp_bitcnt_t b)
 {
     ref_to_pmpz(n);
     ref_to_pmpz(c);
-    return pmpz_congruent_2exp_p(ref(n), ref(c), b);
+    return mpz_congruent_2exp_p(ref(n), ref(c), b);
 }
 
 // Exponentiation Functions
