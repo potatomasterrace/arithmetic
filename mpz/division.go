@@ -5,54 +5,63 @@ import "C"
 
 // Division Functions
 
-//int pmpz_congruent_2exp_p(const unsafe_mpz n, const unsafe_mpz c, mp_bitcnt_t b);
-func (m Mpz) Congruent2ExpP(mpz Mpz, bitcnt uint) int {
-	ret := C.pmpz_congruent_2exp_p(m.Ptr(), mpz.Ptr(), C.ulong(bitcnt))
-	return int(ret)
+// Congruent2ExpP returns if n is congruent to c modulo 2^b.
+// underlying gmp function : mpz_congruent_2exp_p
+func (n Mpz) Congruent2ExpP(c Mpz, b uint) bool {
+	ret := C.pmpz_congruent_2exp_p(n.Ptr(), c.Ptr(), C.ulong(b))
+	return ret != 0
 }
 
-//int pmpz_congruent_p(const unsafe_mpz n, const unsafe_mpz c, const unsafe_mpz d);\
-func (m Mpz) CongruentP(c Mpz, d Mpz) int {
-	ret := C.pmpz_congruent_p(m.Ptr(), c.Ptr(), d.Ptr())
-	return int(ret)
+// Congruent2ExpP returns if n is congruent to c modulo d.
+// underlying gmp function : mpz_congruent_p
+func (n Mpz) CongruentP(c Mpz, d Mpz) bool {
+	ret := C.pmpz_congruent_p(n.Ptr(), c.Ptr(), d.Ptr())
+	return ret != 0
 }
 
-//int pmpz_congruent_ui_p(const unsafe_mpz n, unsigned long int c, unsigned long int d);
-func (m Mpz) CongruentUiP(c uint, d uint) int {
-	ret := C.pmpz_congruent_ui_p(m.Ptr(), C.ulong(c), C.ulong(d))
-	return int(ret)
+// Congruent2ExpP returns if n is congruent to c modulo d.
+// underlying gmp function : mpz_congruent_ui_p
+func (n Mpz) CongruentUiP(c uint, d uint) bool {
+	ret := C.pmpz_congruent_ui_p(n.Ptr(), C.ulong(c), C.ulong(d))
+	return ret != 0
 }
 
-//int pmpz_divisible_2exp_p(const unsafe_mpz n, mp_bitcnt_t b);
-func (m Mpz) Divisible2ExpP(bitcnt uint) int {
-	ret := C.pmpz_divisible_2exp_p(m.Ptr(), C.ulong(bitcnt))
-	return int(ret)
+// Divisible2ExpP return if n is divisible by 2^b.
+// underlying gmp function : mpz_divisible_2exp_p
+func (n Mpz) Divisible2ExpP(b uint) bool {
+	ret := C.pmpz_divisible_2exp_p(n.Ptr(), C.ulong(b))
+	return ret != 0
 }
 
-//int pmpz_divisible_p(const unsafe_mpz n, const unsafe_mpz d);
-func (m Mpz) DivisibleP(d Mpz) int {
-	ret := C.pmpz_divisible_p(m.Ptr(), d.Ptr())
-	return int(ret)
+// DivisibleP return if n is divisible by d.
+// underlying gmp function : mpz_divisible_p
+func (n Mpz) DivisibleP(d Mpz) bool {
+	ret := C.pmpz_divisible_p(n.Ptr(), d.Ptr())
+	return ret != 0
 }
 
-//int pmpz_divisible_ui_p(const unsafe_mpz n, unsigned long int d);
-func (m Mpz) DivisibleUiP(d uint) int {
-	ret := C.pmpz_divisible_ui_p(m.Ptr(), C.ulong(d))
-	return int(ret)
+// DivisibleUiP returns if n is divisible by d.
+// underlying gmp function : mpz_divisible_p
+func (n Mpz) DivisibleUiP(d uint) bool {
+	ret := C.pmpz_divisible_ui_p(n.Ptr(), C.ulong(d))
+	return ret != 0
 }
 
-//unsigned long int pmpz_cdiv_q_ui(unsafe_mpz q, const unsafe_mpz n, unsigned long int d);
-func (m Mpz) CDivQUi(d uint) (q Mpz, ui uint) {
+// CDivQUi returns the quotient q to ceiling(n / d), and the remainder r = | n - q * d |.
+// underlying gmp function : mpz_cdiv_q_ui
+func (n Mpz) CDivQUi(d uint) (q Mpz, r uint) {
 	q = MpzInit()
-	uiLong := C.pmpz_cdiv_q_ui(q.Ptr(), m.Ptr(), C.ulong(d))
+	uiLong := C.pmpz_cdiv_q_ui(q.Ptr(), n.Ptr(), C.ulong(d))
 	return q, uint(uiLong)
 }
 
-//unsigned long int pmpz_cdiv_qr_ui(unsafe_mpz q, unsafe_mpz r, const unsafe_mpz n, unsigned long int d);
-func (m Mpz) CDivQRUi(d uint) (q Mpz, r Mpz, ui uint) {
+// CDivQRUi returns the quotient q to ceiling(n / d), and the remainder r = | n - q * d |,
+// the remainder is also return as an ui if it fits an uint.
+// underlying gmp function : mpz_cdiv_q_ui
+func (n Mpz) CDivQRUi(d uint) (q Mpz, r Mpz, ui uint) {
 	r, q = MpzInit(), MpzInit()
-	uiLong := C.pmpz_cdiv_qr_ui(q.Ptr(), r.Ptr(), m.Ptr(), C.ulong(d))
-	return q, r, uint(uiLong)
+	rUi := C.pmpz_cdiv_qr_ui(q.Ptr(), r.Ptr(), n.Ptr(), C.ulong(d))
+	return q, r, uint(rUi)
 }
 
 //unsigned long int pmpz_cdiv_r_ui(unsafe_mpz r, const unsafe_mpz n, unsigned long int d);
