@@ -16,7 +16,9 @@ func TestPtr(t *testing.T) {
 	mpz := Mpz{
 		ptr: &ptr,
 	}
-	assert.Equal(t, mpz.Ptr(), ptr)
+	retPtr, err := mpz.Ptr()
+	assert.Nil(t, err)
+	assert.Equal(t, retPtr, ptr)
 }
 
 // Test that garbage collection is done.

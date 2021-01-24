@@ -2,6 +2,7 @@ package mpz
 
 // #include "mpz.h"
 import "C"
+import "unsafe"
 
 // Arithmetic Functions
 // Given in the same order than the documentation here : https://gmplib.org/manual/Integer-Arithmetic
@@ -9,7 +10,11 @@ import "C"
 // Add op1 to op2 and return the result.
 // underlying gmp function : mpz_add
 func (op1 Mpz) Add(op2 Mpz) (Mpz, error) {
-	ptr := C.pmpz_add(op1.Ptr(), op2.Ptr())
+	p1, p2, err := get2Pointers(op1, op2)
+	if err != nil {
+		return Mpz{}, err
+	}
+	ptr := C.pmpz_add(p1, p2)
 	return mpzFromPtr(ptr)
 }
 
@@ -30,14 +35,22 @@ func (op1 Mpz) AddMany(ops ...Mpz) (Mpz, error) {
 // Add op1 to op2 and return the result.
 // underlying gmp function : mpz_add_ui
 func (op1 Mpz) AddUi(op2 uint) (Mpz, error) {
-	ptr := C.pmpz_add_ui(op1.Ptr(), C.ulong(op2))
+	p1, err := op1.Ptr()
+	if err != nil {
+		return Mpz{}, err
+	}
+	ptr := C.pmpz_add_ui(p1, C.ulong(op2))
 	return mpzFromPtr(ptr)
 }
 
 // Substract op1 to op2 and return the result.
 // underlying gmp function : mpz_sub
 func (op1 Mpz) Sub(op2 Mpz) (Mpz, error) {
-	ptr := C.pmpz_sub(op1.Ptr(), op2.Ptr())
+	p1, p2, err := get2Pointers(op1, op2)
+	if err != nil {
+		return Mpz{}, err
+	}
+	ptr := C.pmpz_sub(p1, p2)
 	return mpzFromPtr(ptr)
 }
 
@@ -58,21 +71,33 @@ func (op1 Mpz) SubMany(ops ...Mpz) (Mpz, error) {
 // Substract op1 to op2 and return the result.
 // underlying gmp function : mpz_sub_ui
 func (op1 Mpz) SubUi(op2 uint) (Mpz, error) {
-	ptr := C.pmpz_sub_ui(op1.Ptr(), C.ulong(op2))
+	p1, err := op1.Ptr()
+	if err != nil {
+		return Mpz{}, err
+	}
+	ptr := C.pmpz_sub_ui(p1, C.ulong(op2))
 	return mpzFromPtr(ptr)
 }
 
 // Substract op1 to op2 and return the result.
 // underlying gmp function : mpz_ui_sub
 func (op2 Mpz) UiSub(op1 uint) (Mpz, error) {
-	ptr := C.pmpz_ui_sub(C.ulong(op1), op2.Ptr())
+	p2, err := op2.Ptr()
+	if err != nil {
+		return Mpz{}, err
+	}
+	ptr := C.pmpz_ui_sub(C.ulong(op1), p2)
 	return mpzFromPtr(ptr)
 }
 
 // Multiply op1 times op2 and return the result.
 // underlying gmp function : mpz_mul
 func (op1 Mpz) Mul(op2 Mpz) (Mpz, error) {
-	ptr := C.pmpz_mul(op1.Ptr(), op2.Ptr())
+	p1, p2, err := get2Pointers(op1, op2)
+	if err != nil {
+		return Mpz{}, err
+	}
+	ptr := C.pmpz_mul(p1, p2)
 	return mpzFromPtr(ptr)
 }
 
@@ -93,14 +118,22 @@ func (op1 Mpz) MulMany(ops ...Mpz) (Mpz, error) {
 // Multiply op1 times op2 and return the result.
 // underlying gmp function : mpz_mul_si
 func (op1 Mpz) MulSi(op2 int) (Mpz, error) {
-	ptr := C.pmpz_mul_si(op1.Ptr(), C.long(op2))
+	p1, err := op1.Ptr()
+	if err != nil {
+		return Mpz{}, err
+	}
+	ptr := C.pmpz_mul_si(p1, C.long(op2))
 	return mpzFromPtr(ptr)
 }
 
 // Multiply op1 times op2 and return the result.
 // underlying gmp function : mpz_mul_ui
 func (op1 Mpz) MulUi(op2 uint) (Mpz, error) {
-	ptr := C.pmpz_mul_ui(op1.Ptr(), C.ulong(op2))
+	p1, err := op1.Ptr()
+	if err != nil {
+		return Mpz{}, err
+	}
+	ptr := C.pmpz_mul_ui(p1, C.ulong(op2))
 	return mpzFromPtr(ptr)
 }
 
@@ -111,7 +144,12 @@ func (m Mpz) AddMul(op1 Mpz, op2 Mpz) (Mpz, error) {
 	if err != nil {
 		return mCopy, err
 	}
-	C.pmpz_unsafe_addmul(mCopy.Ptr(), op1.Ptr(), op2.Ptr())
+	p1, p2, err := get2Pointers(op1, op2)
+	if err != nil {
+		return Mpz{}, err
+	}
+	mCopyPtr, _ := mCopy.Ptr()
+	C.pmpz_unsafe_addmul(mCopyPtr, p1, p2)
 	return mCopy, nil
 }
 
@@ -122,7 +160,12 @@ func (m Mpz) AddMulUi(op1 Mpz, op2 uint) (Mpz, error) {
 	if err != nil {
 		return mCopy, err
 	}
-	C.pmpz_unsafe_addmul_ui(mCopy.Ptr(), op1.Ptr(), C.ulong(op2))
+	p1, err := op1.Ptr()
+	if err != nil {
+		return Mpz{}, err
+	}
+	mCopyPtr, _ := mCopy.Ptr()
+	C.pmpz_unsafe_addmul_ui(mCopyPtr, p1, C.ulong(op2))
 	return mCopy, nil
 }
 
@@ -133,7 +176,12 @@ func (m Mpz) SubMul(op1 Mpz, op2 Mpz) (Mpz, error) {
 	if err != nil {
 		return mCopy, err
 	}
-	C.pmpz_unsafe_submul(mCopy.Ptr(), op1.Ptr(), op2.Ptr())
+	p1, p2, err := get2Pointers(op1, op2)
+	if err != nil {
+		return Mpz{}, err
+	}
+	mCopyPtr, _ := mCopy.Ptr()
+	C.pmpz_unsafe_submul(mCopyPtr, p1, p2)
 	return mCopy, nil
 }
 
@@ -144,27 +192,80 @@ func (m Mpz) SubMulUi(op1 Mpz, op2 uint) (Mpz, error) {
 	if err != nil {
 		return mCopy, err
 	}
-	C.pmpz_unsafe_submul_ui(mCopy.Ptr(), op1.Ptr(), C.ulong(op2))
+	p1, err := op1.Ptr()
+	if err != nil {
+		return Mpz{}, err
+	}
+	mCopyPtr, _ := mCopy.Ptr()
+	C.pmpz_unsafe_submul_ui(mCopyPtr, p1, C.ulong(op2))
 	return mCopy, nil
 }
 
 // Mul2Exp returns m-op1 times op2 .
 // underlying gmp function : mpz_mul_2exp
 func (op1 Mpz) Mul2Exp(op2 uint) (Mpz, error) {
-	ptr := C.pmpz_mul_2exp(op1.Ptr(), C.ulong(op2))
+	p1, err := op1.Ptr()
+	if err != nil {
+		return Mpz{}, err
+	}
+	ptr := C.pmpz_mul_2exp(p1, C.ulong(op2))
 	return mpzFromPtr(ptr)
 }
 
 // Neg return the negative.
 // underlying gmp function : mpz_neg
 func (op Mpz) Neg() (Mpz, error) {
-	ptr := C.pmpz_neg(op.Ptr())
+	p, err := op.Ptr()
+	if err != nil {
+		return Mpz{}, err
+	}
+	ptr := C.pmpz_neg(p)
 	return mpzFromPtr(ptr)
 }
 
 // Abs return the absolute value.
 // underlying gmp function : mpz_abs
 func (op Mpz) Abs() (Mpz, error) {
-	ptr := C.pmpz_abs(op.Ptr())
+	p, err := op.Ptr()
+	if err != nil {
+		return Mpz{}, err
+	}
+	ptr := C.pmpz_abs(p)
 	return mpzFromPtr(ptr)
+}
+
+func get2Pointers(op1 Mpz, op2 Mpz) (unsafe.Pointer, unsafe.Pointer, error) {
+	p1, err := op1.Ptr()
+	if err != nil {
+		return nil, nil, err
+	}
+	p2, err := op2.Ptr()
+	if err != nil {
+		return nil, nil, err
+	}
+	return p1, p2, nil
+}
+
+func get3Pointers(op1 Mpz, op2 Mpz, op3 Mpz) (unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, error) {
+	p1, p2, err := get2Pointers(op1, op2)
+	if err != nil {
+		return nil, nil, nil, err
+	}
+	p3, err := op3.Ptr()
+	if err != nil {
+		return nil, nil, nil, err
+	}
+	return p1, p2, p3, nil
+}
+
+func get4Pointers(op1 Mpz, op2 Mpz, op3 Mpz, op4 Mpz) (unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, error) {
+	p1, p2, err := get2Pointers(op1, op2)
+	if err != nil {
+		return nil, nil, nil, nil, err
+	}
+	p3, p4, err := get2Pointers(op3, op4)
+	if err != nil {
+		return nil, nil, nil, nil, err
+	}
+	return p1, p2, p3, p4, nil
 }

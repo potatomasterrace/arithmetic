@@ -20,11 +20,14 @@ type Mpz struct {
 	ptr *unsafe.Pointer
 }
 
-func (a Mpz) Ptr() unsafe.Pointer {
-	return *a.ptr
+func (a Mpz) Ptr() (unsafe.Pointer, error) {
+	if a.ptr == nil || *a.ptr == nil {
+		return nil, fmt.Errorf("empty pointer, use the initialization functions.")
+	}
+	return *a.ptr, nil
 }
 
-func mpzFromPtr(ptr unsafe.Pointer) (Mpz, error) {
+var mpzFromPtr func(ptr unsafe.Pointer) (Mpz, error) = func(ptr unsafe.Pointer) (Mpz, error) {
 	if ptr != nil {
 		m := Mpz{
 			ptr: &ptr,
