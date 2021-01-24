@@ -327,8 +327,9 @@ void pmpz_fdiv_qr(unsafe_mpz q, unsafe_mpz r, const unsafe_mpz n, const unsafe_m
 
 unsigned long int pmpz_fdiv_q_ui(const unsafe_mpz q, const unsafe_mpz n, long unsigned int d)
 {
+    ref_to_pmpz(q);
     ref_to_pmpz(n);
-    return mpz_fdiv_q_ui(ref(n), ref(n), d);
+    return mpz_fdiv_q_ui(ref(q), ref(n), d);
 }
 
 unsigned long int pmpz_fdiv_r_ui(const unsafe_mpz r, const unsafe_mpz n, long unsigned int d)
