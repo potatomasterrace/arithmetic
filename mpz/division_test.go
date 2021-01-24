@@ -184,6 +184,28 @@ func TestDivision(t *testing.T) {
 		assert.Equal(t, r.String(), "4")
 	})
 
+	t.Run(("TDivQR"), func(t *testing.T) {
+		q, r := mpz19.TDivQR(mpz6)
+		assert.Equal(t, q.String(), "3")
+		assert.Equal(t, r.String(), "1")
+		q, r = mpz16.TDivQR(mpz6)
+		assert.Equal(t, q.String(), "2")
+		assert.Equal(t, r.String(), "4")
+	})
+
+	t.Run(("CDivQ"), func(t *testing.T) {
+		q := mpz19.CDivQ(mpz6)
+		assert.Equal(t, q.String(), "4")
+		q = mpz16.CDivQ(mpz6)
+		assert.Equal(t, q.String(), "3")
+	})
+
+	t.Run(("CDivQ2Exp"), func(t *testing.T) {
+		q := mpz19.CDivQ2Exp(2)
+		assert.Equal(t, q.String(), "5")
+		q = mpz16.CDivQ2Exp(2)
+		assert.Equal(t, q.String(), "4")
+	})
 	////
 	// t.Run(("FDivRUi"), func(t *testing.T) {
 	// 	r, rUi := mpz19.CDivUi(6)
