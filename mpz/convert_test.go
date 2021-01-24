@@ -7,24 +7,23 @@ import (
 )
 
 func TestConvertion(t *testing.T) {
-	mpz100, err := MpzFromString("100", 10)
-	assert.Nil(t, err)
-	mpz12, err := MpzFromString("-12", 10)
-	assert.Nil(t, err)
+	mpz100 := MpzFromString("100", 10)
+
+	mpz12 := MpzFromString("-12", 10)
 
 	t.Run(("GetString"), func(t *testing.T) {
-		assert.Nil(t, err)
+
 		assert.Equal(t, mpz100.GetString(16), "64")
 		assert.Equal(t, mpz12.GetString(16), "-c")
 	})
 
 	t.Run(("String"), func(t *testing.T) {
-		assert.Nil(t, err)
+
 		assert.Equal(t, mpz100.String(), "100")
 		assert.Equal(t, mpz12.String(), "-12")
 	})
 	t.Run(("GetDouble"), func(t *testing.T) {
-		assert.Nil(t, err)
+
 		assert.Equal(t, mpz100.GetDouble(), float64(100))
 		assert.Equal(t, mpz12.GetDouble(), float64(-12))
 	})

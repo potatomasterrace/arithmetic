@@ -60,37 +60,37 @@ func (m Mpz) MpzRemove(op Mpz, f Mpz) C.ulong {
 }
 
 // unsafe_mpz pmpz_bin_ui(const unsafe_mpz n, unsigned long int k);
-func (m Mpz) MpzBinUi(n C.ulong) (Mpz, error) {
+func (m Mpz) MpzBinUi(n C.ulong) Mpz {
 	ptr := C.pmpz_2fac_ui(n)
 	return mpzFromPtr(ptr)
 }
 
 // unsafe_mpz pmpz_bin_uiui(unsigned long int n, unsigned long int k);
-func (m Mpz) MpzBinUiUi(n C.ulong, k C.ulong) (Mpz, error) {
+func (m Mpz) MpzBinUiUi(n C.ulong, k C.ulong) Mpz {
 	ptr := C.pmpz_2fac_ui(n)
 	return mpzFromPtr(ptr)
 }
 
 // unsafe_mpz pmpz_gcd(const unsafe_mpz op1, const unsafe_mpz op2);
-func (op1 Mpz) MpzGcd(op2 Mpz) (Mpz, error) {
+func (op1 Mpz) MpzGcd(op2 Mpz) Mpz {
 	ptr := C.pmpz_gcd(op1.Ptr(), op2.Ptr())
 	return mpzFromPtr(ptr)
 }
 
 // unsafe_mpz pmpz_lcm(const unsafe_mpz op1, const unsafe_mpz op2);
-func (op1 Mpz) MpzLcm(op2 Mpz) (Mpz, error) {
+func (op1 Mpz) MpzLcm(op2 Mpz) Mpz {
 	ptr := C.pmpz_lcm(op1.Ptr(), op2.Ptr())
 	return mpzFromPtr(ptr)
 }
 
 // unsafe_mpz pmpz_lcm_ui(const unsafe_mpz op1, unsigned long op2);
-func (op1 Mpz) MpzLcmUi(op2 C.ulong) (Mpz, error) {
+func (op1 Mpz) MpzLcmUi(op2 C.ulong) Mpz {
 	ptr := C.pmpz_lcm_ui(op1.Ptr(), op2)
 	return mpzFromPtr(ptr)
 }
 
 // unsafe_mpz pmpz_nextprime(const unsafe_mpz op);
-func (op Mpz) MpzNextPrime() (Mpz, error) {
+func (op Mpz) MpzNextPrime() Mpz {
 	ptr := C.pmpz_nextprime(op.Ptr())
 	return mpzFromPtr(ptr)
 }

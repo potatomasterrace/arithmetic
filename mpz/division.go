@@ -158,91 +158,91 @@ func (m Mpz) TDivQR(d Mpz) (q Mpz, r Mpz) {
 }
 
 //unsafe_mpz pmpz_cdiv_q(const unsafe_mpz n, const unsafe_mpz d);
-func (m Mpz) CDivQ(d Mpz) (Mpz, error) {
+func (m Mpz) CDivQ(d Mpz) Mpz {
 	ptr := C.pmpz_cdiv_q(m.Ptr(), d.Ptr())
 	return mpzFromPtr(ptr)
 }
 
 //unsafe_mpz pmpz_cdiv_q_2exp(const unsafe_mpz n, const mp_bitcnt_t b);
-func (m Mpz) CDivQ2Exp(bitcnt uint) (Mpz, error) {
+func (m Mpz) CDivQ2Exp(bitcnt uint) Mpz {
 	ptr := C.pmpz_cdiv_q_2exp(m.Ptr(), C.ulong(bitcnt))
 	return mpzFromPtr(ptr)
 }
 
 //unsafe_mpz pmpz_cdiv_r(const unsafe_mpz n, const unsafe_mpz d);
-func (m Mpz) CDivR(d Mpz) (Mpz, error) {
+func (m Mpz) CDivR(d Mpz) Mpz {
 	ptr := C.pmpz_cdiv_r(m.Ptr(), d.Ptr())
 	return mpzFromPtr(ptr)
 }
 
 //unsafe_mpz pmpz_cdiv_r_2exp(const unsafe_mpz n, const mp_bitcnt_t b);
-func (m Mpz) CDivR2Exp(bitcnt uint) (Mpz, error) {
+func (m Mpz) CDivR2Exp(bitcnt uint) Mpz {
 	ptr := C.pmpz_cdiv_r_2exp(m.Ptr(), C.ulong(bitcnt))
 	return mpzFromPtr(ptr)
 }
 
 //unsafe_mpz pmpz_divexact(const unsafe_mpz n, const unsafe_mpz d);
-func (m Mpz) CDivExact(d Mpz) (Mpz, error) {
+func (m Mpz) CDivExact(d Mpz) Mpz {
 	ptr := C.pmpz_divexact(m.Ptr(), d.Ptr())
 	return mpzFromPtr(ptr)
 }
 
 //unsafe_mpz pmpz_divexact_ui(const unsafe_mpz n, unsigned long d);
-func (m Mpz) CDivExactUi(d C.ulong) (Mpz, error) {
+func (m Mpz) CDivExactUi(d C.ulong) Mpz {
 	ptr := C.pmpz_divexact_ui(m.Ptr(), d)
 	return mpzFromPtr(ptr)
 }
 
 //unsafe_mpz pmpz_fdiv_q(const unsafe_mpz n, const unsafe_mpz d);
-func (m Mpz) FDivQ(d Mpz) (Mpz, error) {
+func (m Mpz) FDivQ(d Mpz) Mpz {
 	ptr := C.pmpz_fdiv_q(m.Ptr(), d.Ptr())
 	return mpzFromPtr(ptr)
 }
 
 //unsafe_mpz pmpz_fdiv_q_2exp(const unsafe_mpz n, const mp_bitcnt_t b);
-func (m Mpz) FDivQ2Exp(bitcnt C.ulong) (Mpz, error) {
+func (m Mpz) FDivQ2Exp(bitcnt C.ulong) Mpz {
 	ptr := C.pmpz_fdiv_q_2exp(m.Ptr(), bitcnt)
 	return mpzFromPtr(ptr)
 }
 
 //unsafe_mpz pmpz_fdiv_r(const unsafe_mpz n, const unsafe_mpz d);
-func (m Mpz) FDivR(d Mpz) (Mpz, error) {
+func (m Mpz) FDivR(d Mpz) Mpz {
 	ptr := C.pmpz_fdiv_r(m.Ptr(), d.Ptr())
 	return mpzFromPtr(ptr)
 }
 
 //unsafe_mpz pmpz_fdiv_r_2exp(const unsafe_mpz n, const mp_bitcnt_t b);
-func (m Mpz) FDivR2Exp(bitcnt C.ulong) (Mpz, error) {
+func (m Mpz) FDivR2Exp(bitcnt C.ulong) Mpz {
 	ptr := C.pmpz_fdiv_r_2exp(m.Ptr(), bitcnt)
 	return mpzFromPtr(ptr)
 }
 
 //unsafe_mpz pmpz_mod(const unsafe_mpz n, const unsafe_mpz d);
-func (m Mpz) Mod(bitcnt C.ulong) (Mpz, error) {
+func (m Mpz) Mod(bitcnt C.ulong) Mpz {
 	ptr := C.pmpz_fdiv_r_2exp(m.Ptr(), bitcnt)
 	return mpzFromPtr(ptr)
 }
 
 //unsafe_mpz pmpz_tdiv_q(const unsafe_mpz n, const unsafe_mpz d);
-func (m Mpz) TDivQ(d Mpz) (Mpz, error) {
+func (m Mpz) TDivQ(d Mpz) Mpz {
 	ptr := C.pmpz_tdiv_q(m.Ptr(), d.Ptr())
 	return mpzFromPtr(ptr)
 }
 
 //unsafe_mpz pmpz_tdiv_q_2exp(const unsafe_mpz n, const mp_bitcnt_t b);
-func (m Mpz) TDivQ2Exp(bitcnt C.ulong) (Mpz, error) {
+func (m Mpz) TDivQ2Exp(bitcnt C.ulong) Mpz {
 	ptr := C.pmpz_tdiv_q_2exp(m.Ptr(), bitcnt)
 	return mpzFromPtr(ptr)
 }
 
 //unsafe_mpz pmpz_tdiv_r(const unsafe_mpz n, const unsafe_mpz d);
-func (m Mpz) TDivR(d Mpz) (Mpz, error) {
+func (m Mpz) TDivR(d Mpz) Mpz {
 	ptr := C.pmpz_tdiv_r(m.Ptr(), d.Ptr())
 	return mpzFromPtr(ptr)
 }
 
 //unsafe_mpz pmpz_tdiv_r_2exp(const unsafe_mpz n, const mp_bitcnt_t b);
-func (m Mpz) TDivR2Exp(bitcnt C.ulong) (Mpz, error) {
+func (m Mpz) TDivR2Exp(bitcnt C.ulong) Mpz {
 	ptr := C.pmpz_tdiv_r_2exp(m.Ptr(), bitcnt)
 	return mpzFromPtr(ptr)
 }

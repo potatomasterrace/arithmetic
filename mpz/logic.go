@@ -31,25 +31,25 @@ func (op Mpz) MpzScan1(startingBit C.ulong) C.ulong {
 }
 
 // unsafe_mpz pmpz_and(const unsafe_mpz op1, const unsafe_mpz op2);
-func (op1 Mpz) MpzAnd(op2 Mpz) (Mpz, error) {
+func (op1 Mpz) MpzAnd(op2 Mpz) Mpz {
 	ptr := C.pmpz_and(op1.Ptr(), op2.Ptr())
 	return mpzFromPtr(ptr)
 }
 
 // unsafe_mpz pmpz_com(const unsafe_mpz op);
-func (op Mpz) MpzCom() (Mpz, error) {
+func (op Mpz) MpzCom() Mpz {
 	ptr := C.pmpz_com(op.Ptr())
 	return mpzFromPtr(ptr)
 }
 
 // unsafe_mpz pmpz_ior(const unsafe_mpz op1, const unsafe_mpz op2);
-func (op1 Mpz) MpzIOr(op2 Mpz) (Mpz, error) {
+func (op1 Mpz) MpzIOr(op2 Mpz) Mpz {
 	ptr := C.pmpz_ior(op1.Ptr(), op2.Ptr())
 	return mpzFromPtr(ptr)
 }
 
 // unsafe_mpz pmpz_xor(const unsafe_mpz op1, const unsafe_mpz op2);
-func (op1 Mpz) MpzXor(op2 Mpz) (Mpz, error) {
+func (op1 Mpz) MpzXor(op2 Mpz) Mpz {
 	ptr := C.pmpz_xor(op1.Ptr(), op2.Ptr())
 	return mpzFromPtr(ptr)
 }
@@ -57,31 +57,22 @@ func (op1 Mpz) MpzXor(op2 Mpz) (Mpz, error) {
 // TODO add variadic variations of these functions
 
 // void pmpz_clrbit(unsafe_mpz rop, mp_bitcnt_t bit_index);
-func (op Mpz) MpzClrBit(bitIndex C.ulong) (Mpz, error) {
-	rop, err := MpzFromMpz(op)
-	if err != nil {
-		return rop, err
-	}
+func (op Mpz) MpzClrBit(bitIndex C.ulong) Mpz {
+	rop := MpzFromMpz(op)
 	C.pmpz_clrbit(rop.Ptr(), bitIndex)
-	return rop, nil
+	return rop
 }
 
 // void pmpz_combit(unsafe_mpz rop, mp_bitcnt_t bit_index);
-func (op Mpz) MpzComBit(bitIndex C.ulong) (Mpz, error) {
-	rop, err := MpzFromMpz(op)
-	if err != nil {
-		return rop, err
-	}
+func (op Mpz) MpzComBit(bitIndex C.ulong) Mpz {
+	rop := MpzFromMpz(op)
 	C.pmpz_combit(rop.Ptr(), bitIndex)
-	return rop, nil
+	return rop
 }
 
 // void pmpz_setbit(const unsafe_mpz op, mp_bitcnt_t bit_index);
-func (op Mpz) MpzSetBit(bitIndex C.ulong) (Mpz, error) {
-	rop, err := MpzFromMpz(op)
-	if err != nil {
-		return rop, err
-	}
+func (op Mpz) MpzSetBit(bitIndex C.ulong) Mpz {
+	rop := MpzFromMpz(op)
 	C.pmpz_combit(rop.Ptr(), bitIndex)
-	return rop, nil
+	return rop
 }

@@ -7,16 +7,15 @@ import (
 )
 
 func TestDivision(t *testing.T) {
-	mpz19, err := MpzFromString("19", 10)
-	assert.Nil(t, err)
-	mpz16, err := MpzFromString("16", 10)
-	assert.Nil(t, err)
-	mpz7, err := MpzFromString("7", 10)
-	assert.Nil(t, err)
-	mpz4, err := MpzFromString("4", 10)
-	assert.Nil(t, err)
-	mpz3, err := MpzFromString("3", 10)
-	assert.Nil(t, err)
+	mpz19 := MpzFromString("19", 10)
+
+	mpz16 := MpzFromString("16", 10)
+
+	mpz7 := MpzFromString("7", 10)
+
+	mpz4 := MpzFromString("4", 10)
+
+	mpz3 := MpzFromString("3", 10)
 
 	t.Run(("MpzCongruent2ExpP"), func(t *testing.T) {
 		assert.Equal(t, mpz19.Congruent2ExpP(mpz7, 4), false)

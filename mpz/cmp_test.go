@@ -8,12 +8,12 @@ import (
 
 // Arithmetic Functions
 func TestCmp(t *testing.T) {
-	mpz100, err := MpzFromString("100", 10)
-	assert.Nil(t, err)
-	mpz8, err := MpzFromString("8", 10)
-	assert.Nil(t, err)
-	minusMpz8, err := MpzFromString("-8", 10)
-	assert.Nil(t, err)
+	mpz100 := MpzFromString("100", 10)
+
+	mpz8 := MpzFromString("8", 10)
+
+	minusMpz8 := MpzFromString("-8", 10)
+
 	t.Run(("cmp"), func(t *testing.T) {
 		assert.Equal(t, mpz8.Cmp(mpz100), -1)
 		assert.Equal(t, mpz8.Cmp(mpz8), 0)
@@ -63,8 +63,8 @@ func TestCmp(t *testing.T) {
 	})
 
 	t.Run(("sign"), func(t *testing.T) {
-		minusMpz0, err := MpzFromString("0", 10)
-		assert.Nil(t, err)
+		minusMpz0 := MpzFromString("0", 10)
+
 		assert.Equal(t, minusMpz8.Sign(), -1)
 		assert.Equal(t, mpz100.Sign(), 1)
 		assert.Equal(t, minusMpz0.Sign(), 0)

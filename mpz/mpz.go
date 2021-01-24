@@ -24,13 +24,14 @@ func (a Mpz) Ptr() unsafe.Pointer {
 	return *a.ptr
 }
 
-func mpzFromPtr(ptr unsafe.Pointer) (Mpz, error) {
-	if ptr != nil {
-		m := Mpz{
-			ptr: &ptr,
-		}
-		defer runtime.SetFinalizer(m.ptr, clearMpz)
-		return m, nil
+func mpzFromPtr(ptr unsafe.Pointer) Mpz {
+	if ptr == nil {
+		err := fmt.Errorf("cannot initialize value")
+		panic(err)
 	}
-	return Mpz{}, fmt.Errorf("cannot initialize value")
+	m := Mpz{
+		ptr: &ptr,
+	}
+	defer runtime.SetFinalizer(m.ptr, clearMpz)
+	return m
 }
