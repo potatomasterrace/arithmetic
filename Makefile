@@ -1,6 +1,7 @@
 
 SHELL := /bin/bash
 buildDir= ./build
+coverPath= ${buildDir}/coverage.out
 buildExec= $(buildDir)/mpz
 
 clean:
@@ -17,4 +18,5 @@ valgrind:
 	valgrind --leak-check=full --show-leak-kinds=all ./build/mpz
 
 test:
-	go test ./mpz -cover
+	go test ./mpz -coverprofile=${coverPath}
+	go tool cover -html=${coverPath}
