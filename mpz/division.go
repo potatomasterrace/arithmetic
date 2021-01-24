@@ -72,7 +72,7 @@ func (m Mpz) CDivRUi(d uint) (r Mpz, ui uint) {
 }
 
 //unsigned long int pmpz_cdiv_ui(const unsafe_mpz n, unsigned long int d);
-func (m Mpz) mpzCDivRUi(d uint) (r Mpz, ui uint) {
+func (m Mpz) CDivUi(d uint) (r Mpz, ui uint) {
 	r = MpzInit()
 	uiLong := C.pmpz_cdiv_r_ui(r.Ptr(), m.Ptr(), C.ulong(d))
 	return r, uint(uiLong)
@@ -141,18 +141,21 @@ func (m Mpz) TDivUi(d uint) uint {
 
 //void pmpz_cdiv_qr(unsafe_mpz q, unsafe_mpz r, const unsafe_mpz n, const unsafe_mpz d);
 func (m Mpz) CDivQR(d Mpz) (q Mpz, r Mpz) {
+	q, r = MpzInit(), MpzInit()
 	C.pmpz_cdiv_qr(q.Ptr(), r.Ptr(), m.Ptr(), d.Ptr())
 	return q, r
 }
 
 //void pmpz_fdiv_qr(unsafe_mpz q, unsafe_mpz r, const unsafe_mpz n, const unsafe_mpz d);
 func (m Mpz) FDivQR(d Mpz) (q Mpz, r Mpz) {
+	q, r = MpzInit(), MpzInit()
 	C.pmpz_fdiv_qr(q.Ptr(), r.Ptr(), m.Ptr(), d.Ptr())
 	return q, r
 }
 
 //void pmpz_tdiv_qr(unsafe_mpz q, unsafe_mpz r, const unsafe_mpz n, const unsafe_mpz d);
 func (m Mpz) TDivQR(d Mpz) (q Mpz, r Mpz) {
+	q, r = MpzInit(), MpzInit()
 	C.pmpz_tdiv_qr(q.Ptr(), r.Ptr(), m.Ptr(), d.Ptr())
 	return q, r
 }
