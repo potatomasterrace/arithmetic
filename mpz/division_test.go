@@ -12,6 +12,7 @@ func TestDivision(t *testing.T) {
 	mpz16 := MpzFromString("16", 10)
 
 	mpz7 := MpzFromString("7", 10)
+	mpz6 := MpzFromString("6", 10)
 
 	mpz4 := MpzFromString("4", 10)
 
@@ -66,5 +67,131 @@ func TestDivision(t *testing.T) {
 		assert.Equal(t, r.String(), "-5")
 		assert.Equal(t, rUi, uint(5))
 	})
+
+	t.Run(("CDivRUi"), func(t *testing.T) {
+		r, rUi := mpz19.CDivRUi(6)
+		assert.Equal(t, r.String(), "-5")
+		assert.Equal(t, rUi, uint(5))
+		r, rUi = mpz16.CDivRUi(7)
+		assert.Equal(t, r.String(), "-5")
+		assert.Equal(t, rUi, uint(5))
+	})
+	t.Run(("CDivUi"), func(t *testing.T) {
+		r, rUi := mpz19.CDivUi(6)
+		assert.Equal(t, r.String(), "-5")
+		assert.Equal(t, rUi, uint(5))
+		r, rUi = mpz16.CDivUi(7)
+		assert.Equal(t, r.String(), "-5")
+		assert.Equal(t, rUi, uint(5))
+	})
+
+	t.Run(("FDivQUi"), func(t *testing.T) {
+		q, qUi := mpz19.FDivQUi(6)
+		assert.Equal(t, q.String(), "3")
+		assert.Equal(t, qUi, uint(1))
+		q, qUi = mpz16.FDivQUi(7)
+		assert.Equal(t, q.String(), "2")
+		assert.Equal(t, qUi, uint(2))
+	})
+
+	t.Run(("FDivQRUi"), func(t *testing.T) {
+		q, r, rUi := mpz19.FDivQRUi(6)
+		assert.Equal(t, q.String(), "3")
+		assert.Equal(t, r.String(), "1")
+		assert.Equal(t, rUi, uint(1))
+		q, r, rUi = mpz16.FDivQRUi(7)
+		assert.Equal(t, q.String(), "2")
+		assert.Equal(t, r.String(), "2")
+		assert.Equal(t, rUi, uint(2))
+	})
+
+	t.Run(("FDivRUi"), func(t *testing.T) {
+		r, rUi := mpz19.FDivRUi(6)
+		assert.Equal(t, r.String(), "3")
+		assert.Equal(t, rUi, uint(1))
+		r, rUi = mpz16.FDivRUi(7)
+		assert.Equal(t, r.String(), "2")
+		assert.Equal(t, rUi, uint(2))
+	})
+
+	t.Run(("FDivUi"), func(t *testing.T) {
+		rUi := mpz19.FDivUi(6)
+		assert.Equal(t, rUi, uint(1))
+		rUi = mpz16.FDivUi(7)
+		assert.Equal(t, rUi, uint(2))
+	})
+
+	t.Run(("ModUi"), func(t *testing.T) {
+		r, rUi := mpz19.ModUi(6)
+		assert.Equal(t, r.String(), "1")
+		assert.Equal(t, rUi, uint(1))
+		r, rUi = mpz16.ModUi(7)
+		assert.Equal(t, r.String(), "2")
+		assert.Equal(t, rUi, uint(2))
+	})
+
+	t.Run(("TDivQUi"), func(t *testing.T) {
+		q, qUi := mpz19.TDivQUi(6)
+		assert.Equal(t, q.String(), "3")
+		assert.Equal(t, qUi, uint(1))
+		q, qUi = mpz16.TDivQUi(7)
+		assert.Equal(t, q.String(), "2")
+		assert.Equal(t, qUi, uint(2))
+	})
+
+	t.Run(("TDivQRUi"), func(t *testing.T) {
+		q, r, rUi := mpz19.TDivQRUi(6)
+		assert.Equal(t, q.String(), "3")
+		assert.Equal(t, r.String(), "1")
+		assert.Equal(t, rUi, uint(1))
+		q, r, rUi = mpz16.TDivQRUi(7)
+		assert.Equal(t, q.String(), "2")
+		assert.Equal(t, r.String(), "2")
+		assert.Equal(t, rUi, uint(2))
+	})
+
+	t.Run(("TDivRUi"), func(t *testing.T) {
+		r, rUi := mpz19.TDivRUi(6)
+		assert.Equal(t, r.String(), "3")
+		assert.Equal(t, rUi, uint(1))
+		r, rUi = mpz16.TDivRUi(7)
+		assert.Equal(t, r.String(), "2")
+		assert.Equal(t, rUi, uint(2))
+	})
+
+	t.Run(("TDivUi"), func(t *testing.T) {
+		rUi := mpz19.TDivUi(6)
+		assert.Equal(t, rUi, uint(1))
+		rUi = mpz16.TDivUi(7)
+		assert.Equal(t, rUi, uint(2))
+	})
+
+	t.Run(("CDivQR"), func(t *testing.T) {
+		q, r := mpz19.CDivQR(mpz6)
+		assert.Equal(t, q.String(), "4")
+		assert.Equal(t, r.String(), "-5")
+		q, r = mpz16.CDivQR(mpz6)
+		assert.Equal(t, q.String(), "3")
+		assert.Equal(t, r.String(), "-2")
+	})
+
+	t.Run(("FDivQR"), func(t *testing.T) {
+		q, r := mpz19.FDivQR(mpz6)
+		assert.Equal(t, q.String(), "3")
+		assert.Equal(t, r.String(), "1")
+		q, r = mpz16.FDivQR(mpz6)
+		assert.Equal(t, q.String(), "2")
+		assert.Equal(t, r.String(), "4")
+	})
+
+	////
+	// t.Run(("FDivRUi"), func(t *testing.T) {
+	// 	r, rUi := mpz19.CDivUi(6)
+	// 	assert.Equal(t, r.String(), "-5")
+	// 	assert.Equal(t, rUi, uint(5))
+	// 	r, rUi = mpz16.CDivUi(7)
+	// 	assert.Equal(t, r.String(), "-5")
+	// 	assert.Equal(t, rUi, uint(5))
+	// })
 
 }
