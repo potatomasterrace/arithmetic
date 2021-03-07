@@ -185,14 +185,14 @@ func (m Mpz) CDivR2Exp(bitcnt uint) Mpz {
 }
 
 //unsafe_mpz pmpz_divexact(const unsafe_mpz n, const unsafe_mpz d);
-func (m Mpz) CDivExact(d Mpz) Mpz {
+func (m Mpz) DivExact(d Mpz) Mpz {
 	ptr := C.pmpz_divexact(m.Ptr(), d.Ptr())
 	return mpzFromPtr(ptr)
 }
 
 //unsafe_mpz pmpz_divexact_ui(const unsafe_mpz n, unsigned long d);
-func (m Mpz) CDivExactUi(d C.ulong) Mpz {
-	ptr := C.pmpz_divexact_ui(m.Ptr(), d)
+func (m Mpz) DivExactUi(d uint) Mpz {
+	ptr := C.pmpz_divexact_ui(m.Ptr(), C.ulong(d))
 	return mpzFromPtr(ptr)
 }
 
